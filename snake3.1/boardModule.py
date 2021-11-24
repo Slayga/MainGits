@@ -22,18 +22,17 @@ class GameBoard:
         print("init")
         self.window = window
         # Borders of the game board
-        self.x_min = 0
+        self.x_min = 1
+        self.y_min = 1
         # Makes sure the board is at least 2 in width
         self.x_max = size if size >= 2 else 12
-        self.y_min = 0
-        # At least 2 in height...
         self.y_max = size if size >= 2 else 12
 
         self.colors = colors
 
-        # WINDOW CHANGE AT OWN RISK
+        # Tk() WINDOW CHANGE AT OWN RISK
         self.__scaler = 45.833333333333333333333333333333
-        self.__tk_x = int(self.x_max * self.__scaler)
+        self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
         self.window.geometry(f"{self.__tk_x}x{self.__tk_x}")
         self.window.title("Snake3.1")
@@ -43,7 +42,19 @@ class GameBoard:
 
     def __create_board_grid(self) -> dict:
         self.lbl = dict()
-        for y in range(0, self.y_max):
+
+        # TODO
+        # Skapa Outside Bounds
+
+        # TODO
+        # Skapa scorebar högst upp
+        # TODO
+        # Skapa kontroller-bar längst ner
+        #
+
+        # // TODO
+        # Skapa spelyta
+        for y in range(self.y_min, self.y_max):
             self.lbl[y] = list()
             Grid.rowconfigure(self.window, y, weight=1)
 
@@ -65,4 +76,5 @@ class GameBoard:
                 )
                 self.xlbl.grid(row=y, column=x, sticky=N + S + E + W)
                 self.lbl[y].append((self.xlbl, x, y))
+
         return self.lbl

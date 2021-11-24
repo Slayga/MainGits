@@ -16,7 +16,7 @@ from snakeModule import Snake
 class Snake3:
     def __init__(self):
         self.game_tk = Tk()
-        self.board = GameBoard(self.game_tk, 2, ["#d8de81", "#ffde88"])
+        self.board = GameBoard(self.game_tk, 12, ["#d8de81", "#ffde88"])
         self.snake = Snake()
 
     def run(self):
