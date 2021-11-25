@@ -19,6 +19,7 @@ class Snake3:
         self.board = GameBoard(self.game_tk, 12, ["#d8de81", "#ffde88"])
         self.snake = Snake(self.game_tk, "🐍", "red", "blue",
                            int(self.board.x_max / 2))
+        self.board._callable_ = self.snake.change_direction
 
     def run(self):
         self.board.run()
