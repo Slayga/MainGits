@@ -25,10 +25,12 @@ class GameBoard:
         self.x_min = 1
         self.y_min = 1
         # Makes sure the board is at least 2 in width
-        self.x_max = size if size >= 2 else 12
-        self.y_max = size if size >= 2 else 12
+        self.x_max = size if size >= 3 else 12
+        self.y_max = size if size >= 3 else 12
 
         self.colors = colors
+        self.score = 1
+        self.scoreboard = Label
 
         # Tk() WINDOW CHANGE AT OWN RISK
         self.__scaler = 45.833333333333333333333333333333
@@ -40,12 +42,18 @@ class GameBoard:
         # Creating the "play area" for the game
         self.__lbls = self.__create_board_grid()
 
+    def update_score(self):
+        ...
+
     def __create_board_grid(self) -> dict:
         self.lbl = dict()
 
         # TODO
         # Skapa Outside Bounds
-
+        self.scoreboard = Label(self.window,
+                                text=f"{self.score-1}",
+                                bg="white")
+        self.scoreboard.grid(column=1, row=0, columnspan=self.x_max)
         # TODO
         # Skapa scorebar högst upp
         # TODO
