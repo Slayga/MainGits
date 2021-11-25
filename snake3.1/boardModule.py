@@ -29,6 +29,7 @@ class GameBoard:
         self.y_max = size if size >= 3 else 12
 
         self.colors = colors
+
         self.score = 1
         self.scoreboard = Label
 
@@ -39,6 +40,9 @@ class GameBoard:
         self.window.geometry(f"{self.__tk_x}x{self.__tk_x}")
         self.window.title("Snake3.1")
         self.window.configure(bg="white")
+
+        self.control = Label(self.window, bg="white")
+        self.control.grid(column=1, row=0)
         # Creating the "play area" for the game
         self.__lbls = self.__create_board_grid()
 
@@ -58,7 +62,6 @@ class GameBoard:
         # Skapa scorebar högst upp
         # TODO
         # Skapa kontroller-bar längst ner
-        #
 
         # // TODO
         # Skapa spelyta
