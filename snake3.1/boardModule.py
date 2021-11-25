@@ -13,12 +13,12 @@ class GameBoard:
     _isinstance = None
 
     # Singletone method... Forces that only ONE object can exist of the class
-    def __new__(cls, window: Tk, size: int, colors: list):
+    def __new__(cls, window: Tk, size: int, colors: list, callable=None):
         if cls._isinstance is None:
             cls._isinstance = True
             return super().__new__(cls)
 
-    def __init__(self, window: Tk, size: int, colors: list):
+    def __init__(self, window: Tk, size: int, colors: list, callable_=None):
         self.window = window
         # Borders of the game board
         self.x_min = 1
@@ -39,10 +39,21 @@ class GameBoard:
         self.window.title("Snake3.1")
         self.window.configure(bg="white")
 
+        self._callable_ = callable_ if callable(callable_) else None
+
         self.scoreboard = Label
         self.control = Label
         # Creating the "play area" for the game
         self.__lbls = self.__create_board_grid()
+
+    @property
+    def callable_(self):
+        return self._callable_
+
+    @callable_.setter
+    def callable(self, value):
+        if callable(value):
+            self._callable_ = value
 
     def update_score(self):
         self.score += 1
@@ -55,7 +66,8 @@ class GameBoard:
         return self.__lbls
 
     def get_dir(self, event) -> str:
-        return event.keysym
+        self.callable_(event.keysym)
+        return
 
     def __create_board_grid(self) -> dict:
         self.__lbl = dict()
