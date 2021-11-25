@@ -5,6 +5,7 @@ Info:
 Snake Module
 """
 from tkinter import Tk, Label, Grid
+from typing import Callable
 
 class Snake:
     def __init__(self, window: Tk, apperance: str, head_color: str, tail_color: str, start_pos:int, audio:bool=False):
@@ -14,20 +15,21 @@ class Snake:
         self.tail_color = tail_color
         self.start_pos = start_pos
 
+        
         self.alive = True
         self.direction = str()
         self.old_direction = str()
         
         self.audio = audio
         
-        self.lbl_snake = Label(self.window, 
+        self.lbl_snake = Label(self.window, font=(30),
                                   text=self.apperance,
                                   bg=self.head_color)
         # Grid.rowconfigure(self.window, self.start_pos, weight=1)
         # Grid.columnconfigure(self.window, self.start_pos, weight=1)
-        self.window.grid_columnconfigure(0, weight=1)
+        # self.window.grid_columnconfigure(0, weight=1)
         self.lbl_snake.grid(column=self.start_pos,
-                            row=self.start_pos, rowspan=1, columnspan=1)
+                            row=self.start_pos)
         
     def opposite_dir(self)->str:
         match self.direction:
@@ -39,3 +41,6 @@ class Snake:
                 return "Down"
             case "Down":
                 return "Up"
+    
+    def change_direction(self, value=None):
+        print(value)
