@@ -22,7 +22,9 @@ class Snake3:
         self.board._callable_ = self.snake.change_direction
 
     def run(self):
-        self.board.run()
+        if self.board.run():
+            self.berry.run()
+            self.update()
 
         # END OF FUNCTION #
         self.game_tk.mainloop()
