@@ -29,10 +29,10 @@ class GameBoard:
 
         self.colors = colors
 
-        self.score = 1
+        self.score = 0
 
         # Tk() WINDOW CHANGE AT OWN RISK
-        self.__scaler = 45.833333333333333333333333333333
+        self.__scaler = 45.8 + (1 / 3)
         self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
         self.window.geometry(f"{self.__tk_x}x{self.__tk_x}")
@@ -43,8 +43,10 @@ class GameBoard:
 
         self.scoreboard = Label
         self.control = Label
+        self.possible_dir = ["Up", "Down", "Left", "Right"]
         # Creating the "play area" for the game
         self.__lbls = self.__create_board_grid()
+        del self.__lbl
 
     @property
     def callable_(self):
@@ -55,17 +57,24 @@ class GameBoard:
         if callable(value):
             self._callable_ = value
 
+    def display_text(self, text=None):
+        self.scoreboard.config(text=(None if text is None else text))
+
     def update_score(self):
         self.score += 1
         self.scoreboard.config(text=self.score - 1)
 
     def run(self):
         self.control.focus()
+        return True
 
     def get_lbls(self) -> dict:
         return self.__lbls
 
     def get_dir(self, event) -> str:
+        print(event.keysym)
+        if self.score < 1 and event.keysym in self.possible_dir:
+            self.update_score()
         self.callable_(event.keysym)
         return
 
@@ -74,9 +83,10 @@ class GameBoard:
 
         # // TODO
         # Create scorebar & controller-bar at the top
-        self.scoreboard = Label(self.window,
-                                text=f"{self.score-1}",
-                                bg="white")
+        self.scoreboard = Label(
+            self.window,
+            text=f"Press {', '.join(i for i in self.possible_dir)} to start",
+            bg="white")
         self.scoreboard.grid(column=1, row=0, columnspan=self.x_max)
 
         self.control = Label(self.window, bg="white")
