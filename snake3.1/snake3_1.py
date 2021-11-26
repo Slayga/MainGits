@@ -28,6 +28,9 @@ class Snake3:
         self.game_tk.mainloop()
 
 
+# ======= RUNNER CODE ======= #
+
+
 def main():
     a = Snake3()
     a.run()
