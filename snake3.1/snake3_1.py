@@ -46,20 +46,12 @@ class Snake3:
                     self.snake.tail_length += 1
                     self.berry.grid(self.board, self.snake, self.tail)
 
-                    # if self.snake.tail_length >= 1:
+            # Tail drawing should go here.....
 
-                self.labels = self.board.get_lbls()
-                self.label = self.labels[self.snake.y][self.snake.x]
-                self.old_color = self.label[0].cget("bg")
-                self.game_tk.after(
-                    (250 * self.board.score),
-                    lambda: self.label[0].config(bg=self.old_color))
-                self.game_tk.after(
-                    250,
-                    lambda: self.label[0].config(bg=self.snake.tail_color))
-            else:
-                self.snake.kill()
-        self.game_tk.after(250, self.update)
+            self.game_tk.after(250, self.update)
+
+        else:
+            self.snake.kill()
 
         #if eat():
         ### self.tail.grow(self.game_tk, self.score, self.board.lbls[self.snake.y][self.snake.x])
