@@ -5,6 +5,8 @@ Info:
 Snake Module
 """
 from tkinter import Tk, Label, N, S, W, E
+from boardModule import GameBoard
+from tailModule import Tail
 
 class Snake:
     def __init__(self, window: Tk, apperance: str, head_color: str, tail_color: str, start_pos:int, audio:bool=False):
@@ -13,6 +15,9 @@ class Snake:
         self.head_color = head_color
         self.tail_color = tail_color
         self.start_pos = start_pos
+        
+        self.x = start_pos
+        self.y = start_pos
 
         self.alive = True
         self.direction = str()
@@ -25,8 +30,10 @@ class Snake:
         self.lbl_snake.grid(column=self.start_pos,
                             row=self.start_pos, sticky=N + S + W+ E)
         
-    def opposite_dir(self)->str:
-        match self.direction:
+        self.tail_length = 0
+        
+    def opposite_dir(self, dir)->str:
+        match dir:
             case "Right":
                 return "Left"
             case "Left":
@@ -37,4 +44,50 @@ class Snake:
                 return "Up"
     
     def change_direction(self, value=None):
-        ...
+        if value is not None:
+            print(self.x, self.y)
+            self.old_direction = self.direction
+            self.direction = value
+        
+    def update(self):
+        match self.direction:
+            case "Right":
+                self.x += 1
+            case "Left":
+                self.x -= 1
+            case "Up":
+                self.y -= 1
+            case "Down":
+                self.y += 1
+    
+    def check_collision(self, board: GameBoard, tail: Tail, spike:object=None):
+        lbl = board.get_lbls()
+        # Check if snake is out of bounds
+        if (self.x >= board.x_max or
+            self.x < board.x_min or
+            self.y >= board.y_max or
+            self.y < board.y_min):
+            self.alive = False
+            return False
+        # Check if snake is turning in to itself when it has a tail
+        elif self.old_direction == self.opposite_dir(self.direction) and board.score > 1:
+            self.alive = False
+            return False
+        # Check if snake collides with the tail
+        elif lbl[self.y][self.x][0].cget("bg") == tail.color and board.score > 1:
+            self.alive = False
+            return False
+        # If spike is in the game, checks collision for that...
+        if spike is not None:
+            if lbl[self.y][self.x][0].cget("text") == spike.apperance:
+                self.alive = False
+                return False
+        return True
+
+    def move(self):
+        self.lbl_snake.grid(row=self.y, column=self.x)
+    
+    def kill(self):
+        self.alive = None
+        self.direction = ""
+        self.lbl_snake.config(bg="black")
