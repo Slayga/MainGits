@@ -35,7 +35,8 @@ class GameBoard:
         self.__scaler = 45.8 + (1 / 3)
         self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
-        self.window.geometry(f"{self.__tk_x}x{self.__tk_x}")
+        self.window.geometry(
+            f"{self.__tk_x}x{int(self.__tk_x+(2*45.8+(1/3)))}")
         self.window.title("Snake3.1")
         self.window.configure(bg="white")
 
@@ -62,7 +63,7 @@ class GameBoard:
 
     def update_score(self):
         self.score += 1
-        self.scoreboard.config(text=self.score - 1)
+        self.scoreboard.config(text=self.score)
 
     def run(self):
         self.control.focus()
@@ -72,10 +73,10 @@ class GameBoard:
         return self.__lbls
 
     def get_dir(self, event) -> str:
-        print(event.keysym)
         if self.score < 1 and event.keysym in self.possible_dir:
             self.update_score()
-        self.callable_(event.keysym)
+        if event.keysym in self.possible_dir:
+            self.callable_(event.keysym)
         return
 
     def __create_board_grid(self) -> dict:
