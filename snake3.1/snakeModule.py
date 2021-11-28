@@ -20,6 +20,7 @@ class Snake:
         self.y = start_pos
 
         self.alive = True
+        
         self.direction = str()
         self.old_direction = str()
         
@@ -59,6 +60,7 @@ class Snake:
                 self.y -= 1
             case "Down":
                 self.y += 1
+
     
     def check_collision(self, board: GameBoard, tail: Tail, spike:object=None):
         lbl = board.get_lbls()
@@ -67,20 +69,20 @@ class Snake:
             self.x < board.x_min or
             self.y >= board.y_max or
             self.y < board.y_min):
-            self.alive = False
+            self.alive = None
             return False
         # Check if snake is turning in to itself when it has a tail
         elif self.old_direction == self.opposite_dir(self.direction) and board.score > 1:
-            self.alive = False
+            self.alive = None
             return False
         # Check if snake collides with the tail
-        elif lbl[self.y][self.x][0].cget("bg") == tail.color and board.score > 1:
-            self.alive = False
+        elif lbl[self.y][self.x].cget("bg") == tail.color and board.score > 1:
+            self.alive = None
             return False
         # If spike is in the game, checks collision for that...
         if spike is not None:
-            if lbl[self.y][self.x][0].cget("text") == spike.apperance:
-                self.alive = False
+            if lbl[self.y][self.x].cget("text") == spike.apperance:
+                self.alive = None
                 return False
         return True
 

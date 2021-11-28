@@ -117,6 +117,6 @@ class GameBoard:
                     bg=self.__rbg,
                 )
                 self.__xlbl.grid(row=y, column=x, sticky=N + S + E + W)
-                self.__lbl[y].append((self.__xlbl, x, y))
+                self.__lbl[y].append(self.__xlbl)
 
         return self.__lbl

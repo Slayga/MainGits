@@ -31,7 +31,7 @@ class Berry:
                     randint(board.y_min,
                             board.y_max - 1)
 
-            if (lbl.get(self.y)[self.x][0].cget("bg") != tail.color and \
+            if (lbl.get(self.y)[self.x].cget("bg") != tail.color and \
                 (self.x, self.y) != (snake.x, snake.y)):
                 self.lbl_berry.grid(column=self.x,
                                     row=self.y,
