@@ -46,7 +46,6 @@ class Snake:
     
     def change_direction(self, value=None):
         if value is not None:
-            print(self.x, self.y)
             self.old_direction = self.direction
             self.direction = value
         
