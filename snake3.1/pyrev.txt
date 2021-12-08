@@ -1,1 +1,0 @@
-pyreverse -o png -p Snake3.1 snake3.1
