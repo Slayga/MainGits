@@ -1,3 +1,11 @@
+"""
+Name: Gabriel Engberg
+Info:
+This program is bad practice using globals is very bad & every 
+variable is in global scope. Instead of local...
+"""
+
+
 from tkinter import *
 from random import randint
 from playsound import *
