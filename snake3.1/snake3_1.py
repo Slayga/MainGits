@@ -12,7 +12,6 @@ from boardModule import GameBoard
 from snakeModule import Snake
 from berryModule import Berry
 from tailModule import Tail
-import time
 
 
 class Snake3:
