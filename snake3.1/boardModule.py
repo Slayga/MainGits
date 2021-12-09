@@ -45,7 +45,7 @@ class GameBoard:
         self.scoreboard = Label
         self.control = Label
         self.possible_dir = ["Up", "Down", "Left", "Right"]
-        # Creating the "play area" for the game
+        # Creating the "play area" for the game aka bounds
         self.__lbls = self.__create_board_grid()
         del self.__lbl
 
@@ -69,7 +69,7 @@ class GameBoard:
         self.control.focus()
         return True
 
-    def get_lbls(self) -> dict:
+    def get_lbls(self) -> dict[Label]:
         return self.__lbls
 
     def get_dir(self, event) -> str:
@@ -112,8 +112,6 @@ class GameBoard:
                 self.__rbg = r_choice(self.colors)
                 self.__xlbl = Label(
                     self.window,
-                    text=f"{x}",
-                    fg="white",
                     bg=self.__rbg,
                 )
                 self.__xlbl.grid(row=y, column=x, sticky=N + S + E + W)
