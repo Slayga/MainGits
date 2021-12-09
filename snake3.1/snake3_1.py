@@ -47,7 +47,7 @@ class Snake3:
                     self.snake.tail_length += 1
                     self.berry.grid(self.board, self.snake, self.tail)
 
-                # Tail drawing should go here.....
+                # Tail drawing should go here..... #TODO Implement tail drawing in tail module... @Slayga
                 if self.board.score > 1:
                     labels = self.board.get_lbls()
                     newTail = labels[self.snake.y][self.snake.x]
