@@ -12,6 +12,7 @@ from boardModule import GameBoard
 from snakeModule import Snake
 from berryModule import Berry
 from tailModule import Tail
+import time
 
 
 class Snake3:
@@ -47,16 +48,17 @@ class Snake3:
                     self.berry.grid(self.board, self.snake, self.tail)
 
                 # Tail drawing should go here.....
-                labels = self.board.get_lbls()
-                newTail = labels[self.snake.y][self.snake.x]
-                old_color = newTail.cget("bg")
-                self.game_tk.after((250 * self.board.score),
-                                   lambda newTail=newTail, old_color=old_color:
-                                   newTail.config(bg=old_color))
-                self.game_tk.after(
-                    250,
-                    lambda newTail=newTail, tail_color=self.snake.tail_color:
-                    newTail.config(bg=tail_color))
+                if self.board.score > 1:
+                    labels = self.board.get_lbls()
+                    newTail = labels[self.snake.y][self.snake.x]
+                    old_color = newTail.cget("bg")
+                    self.game_tk.after((250 * self.board.score),
+                                       lambda newTail=newTail, old_color=
+                                       old_color: newTail.config(bg=old_color))
+                    self.game_tk.after(
+                        250,
+                        lambda newTail=newTail, tail_color=self.snake.
+                        tail_color: newTail.config(bg=tail_color))
 
             self.game_tk.after(250, self.update)
 
