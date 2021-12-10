@@ -7,18 +7,31 @@ Gameboard class
 
 from tkinter import Tk, Label, Grid, N, S, W, E
 from random import choice as r_choice
+from typing import Callable
 
 
 class GameBoard:
     _isinstance = None
 
     # Singletone method... Forces that only ONE object can exist of the class
-    def __new__(cls, window: Tk, size: int, colors: list, callable=None):
+    def __new__(cls,
+                window: Tk,
+                size: int,
+                colors: list,
+                callable: Callable = None):
+
         if cls._isinstance is None:
             cls._isinstance = True
             return super().__new__(cls)
+        else:
+            return cls
 
-    def __init__(self, window: Tk, size: int, colors: list, callable_=None):
+    def __init__(self,
+                 window: Tk,
+                 size: int,
+                 colors: list,
+                 callable_: Callable = None):
+
         self.window = window
         # Borders of the game board
         self.x_min = 1
@@ -31,8 +44,9 @@ class GameBoard:
 
         self.score = 0
 
-        # Tk() WINDOW CHANGE AT OWN RISK
-        self.__scaler = 45.8 + (1 / 3)
+        # Tk() ... CHANGE AT OWN RISK
+        # Scaler is to get the screen to fit the size of the playarea.
+        self.__scaler = 45.8 + (1 / 3)  # => (45.8333333)
         self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
         self.window.geometry(
@@ -47,6 +61,7 @@ class GameBoard:
         self.possible_dir = ["Up", "Down", "Left", "Right"]
         # Creating the "play area" for the game aka bounds
         self.__lbls = self.__create_board_grid()
+        # To clear up memory
         del self.__lbl
 
     @property
@@ -63,7 +78,7 @@ class GameBoard:
 
     def update_score(self):
         self.score += 1
-        self.scoreboard.config(text=self.score)
+        self.scoreboard.config(text=self.score - 1)
 
     def run(self):
         self.control.focus()
@@ -96,7 +111,11 @@ class GameBoard:
 
         # // TODO
         # Creates game bounds...
+        # Starts with looping over every y-row
         for y in range(self.y_min, self.y_max):
+            # self.__lbl => {1:[], 2:[], 3:[] ... y:[]}
+            # The key is the y coordinate, and the value is a list of all x
+            # coordinates as Labels
             self.__lbl[y] = list()
             Grid.rowconfigure(self.window, y, weight=1)
 
