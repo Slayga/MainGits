@@ -64,20 +64,12 @@ class Snake3:
         else:
             self.snake.kill()
 
-        #if eat():
-        ### self.tail.grow(self.game_tk, self.score, self.board.lbls[self.snake.y][self.snake.x])
-        ### self.snake.tail_length += 1
-        ### self.board.update_score()
-
-        # END OF FUNCTION #
-
 
 # ======= RUNNER CODE ======= #
 
 
 def main():
-    a = Snake3()
-    a.run()
+    Snake3().run()
 
 
 if __name__ == "__main__":
