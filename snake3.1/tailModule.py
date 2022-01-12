@@ -12,6 +12,7 @@ class Tail:
     def __init__(self, window, color):
         self.window = window
         self.color = color
+        self.length = 0
 
         self.update_speed = 250
 

@@ -58,7 +58,7 @@ class GameBoard:
 
         self.scoreboard = Label
         self.control = Label
-        self.possible_dir = ["Up", "Down", "Left", "Right"]
+        self.possible_dir = ["Up", "Down", "Left", "Right", "d", "a", "w", "s"]
         # Creating the "play area" for the game aka bounds
         self.__lbls = self.__create_board_grid()
         # To clear up memory

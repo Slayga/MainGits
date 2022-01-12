@@ -31,7 +31,7 @@ class Snake:
         self.lbl_snake.grid(column=self.start_pos,
                             row=self.start_pos, sticky=N + S + W+ E)
         
-        self.tail_length = 0
+        self.tail = Tail(self.window, self.snake.tail_color)
         
     def opposite_dir(self, dir)->str:
         match dir:
@@ -43,6 +43,14 @@ class Snake:
                 return "Down"
             case "Down":
                 return "Up"
+            case "d":
+                return "a"
+            case "a":
+                return "d"
+            case "w":
+                return "s"
+            case "s":
+                return "w"
     
     def change_direction(self, value=None):
         if value is not None:
@@ -58,6 +66,14 @@ class Snake:
             case "Up":
                 self.y -= 1
             case "Down":
+                self.y += 1
+            case "d":
+                self.x += 1
+            case "a":
+                self.x -= 1
+            case "w":
+                self.y -= 1
+            case "s":
                 self.y += 1
 
     

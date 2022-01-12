@@ -21,7 +21,7 @@ class Snake3:
         self.snake = Snake(self.game_tk, "🐍", "red", "green",
                            int(self.board.x_max / 2))
         self.board._callable_ = self.snake.change_direction
-        self.tail = Tail(self.game_tk, self.snake.tail_color)
+
         self.berry = Berry(self.game_tk, "blue")
 
     def run(self):
@@ -43,10 +43,11 @@ class Snake3:
                 if (self.berry.x, self.berry.y) == (self.snake.x,
                                                     self.snake.y):
                     self.board.update_score()
-                    self.snake.tail_length += 1
+                    self.snake.tail.length += 1
                     self.berry.grid(self.board, self.snake, self.tail)
 
                 # Tail drawing should go here..... #TODO Implement tail drawing in tail module... @Slayga
+                # ? Currently moving tail module to be called inside snake module...move this @Slayga
                 if self.board.score > 1:
                     labels = self.board.get_lbls()
                     newTail = labels[self.snake.y][self.snake.x]
