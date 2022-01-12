@@ -26,7 +26,7 @@ class Snake3:
 
     def run(self):
         if self.board.run():
-            self.berry.grid(self.board, self.snake, self.tail)
+            self.berry.grid(self.board, self.snake, self.snake.tail)
             # self.tail.run()
             self.update()
 
@@ -38,13 +38,13 @@ class Snake3:
             # !Always update snake first! #
             self.snake.update()
             # !=========================! #
-            if self.snake.check_collision(self.board, self.tail):
+            if self.snake.check_collision(self.board, self.snake.tail):
                 self.snake.move()
                 if (self.berry.x, self.berry.y) == (self.snake.x,
                                                     self.snake.y):
                     self.board.update_score()
                     self.snake.tail.length += 1
-                    self.berry.grid(self.board, self.snake, self.tail)
+                    self.berry.grid(self.board, self.snake, self.snake.tail)
 
                 # Tail drawing should go here..... #TODO Implement tail drawing in tail module... @Slayga
                 # ? Currently moving tail module to be called inside snake module...move this @Slayga

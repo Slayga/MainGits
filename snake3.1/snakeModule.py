@@ -31,7 +31,7 @@ class Snake:
         self.lbl_snake.grid(column=self.start_pos,
                             row=self.start_pos, sticky=N + S + W+ E)
         
-        self.tail = Tail(self.window, self.snake.tail_color)
+        self.tail = Tail(self.window, self.tail_color)
         
     def opposite_dir(self, dir)->str:
         match dir:
