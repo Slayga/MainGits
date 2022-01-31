@@ -5,8 +5,10 @@ Info:
 <Insert information about file>
 """
 
+#! Needs to be cleaned up and commented out... I have no idea what I did here #
 
-def before(src:str, i:int, invert=False)-> str | None:
+
+def before(src: str, i: int, invert=False) -> str | None:
     """Returns char at index before the give index, or after if invert.
 
     Args:
@@ -16,21 +18,20 @@ def before(src:str, i:int, invert=False)-> str | None:
 
     Returns:
         [str | None]: [returns char before else None if out of range]
-    """    
+    """
     match i:
         case 0:
             return None
         case len(src):
             return None
     if invert:
-        return src[i+1]
-    return src[i-1]
+        return src[i + 1]
+    return src[i - 1]
 
 
-def count_ops(source: str, comparer: str | list) -> dict: 
+def count_ops(source: str, comparer: str | list) -> dict:
     op_dict = dict(zip(comparer, [0] * len(comparer)))
-    
-    
+
 
 def evaluate(source: str) -> int | float:
     operators = ["(", "**", "^", "/", "*", "+", "-"]
