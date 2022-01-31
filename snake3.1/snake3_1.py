@@ -9,7 +9,11 @@ from tkinter import *
 # from playsound import *
 # from threading import Thread
 # import sys as sus
-import modules
+
+from modules.boardModule import GameBoard
+from modules.snakeModule import Snake
+from modules.tailModule import Tail  # Being integrated to the snakeModule
+from modules.berryModule import Berry
 
 
 class Snake3:
