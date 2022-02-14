@@ -50,14 +50,14 @@ class Snake3:
                 # ? Currently moving tail module to be called inside snake module...move this @Slayga
                 if self.board.score > 1:
                     labels = self.board.get_lbls()
-                    newTail = labels[self.snake.y][self.snake.x]
-                    old_color = newTail.cget("bg")
+                    self.newTail = labels[self.snake.y][self.snake.x]
+                    old_color = self.newTail.cget("bg")
                     self.game_tk.after((250 * self.board.score),
-                                       lambda newTail=newTail, old_color=
+                                       lambda newTail=self.newTail, old_color=
                                        old_color: newTail.config(bg=old_color))
                     self.game_tk.after(
                         250,
-                        lambda newTail=newTail, tail_color=self.snake.
+                        lambda newTail=self.newTail, tail_color=self.snake.
                         tail_color: newTail.config(bg=tail_color))
 
             self.game_tk.after(250, self.update)
